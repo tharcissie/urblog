@@ -29,6 +29,9 @@ def home(request):
 def login_social(request, template_name='home/social.html'):
     return render(request, template_name,{})
 
+
+## function of article details and comment stuff
+
 def article_details(request, pk, template_name='home/article_details.html'):
     article = get_object_or_404(Article, pk=pk)
     comments = Comment.objects.filter(article = article).order_by('id')
@@ -43,7 +46,6 @@ def article_details(request, pk, template_name='home/article_details.html'):
             comment.save()
             
             return redirect('article_list')
-        
 
     else:
         comment_form = CommentForm()
@@ -54,6 +56,8 @@ def article_details(request, pk, template_name='home/article_details.html'):
         'comment_form':comment_form
     }   
     return render(request, template_name, context)
+
+## dealing with search features
 
 class SearchResult(ListView):
     model = Article

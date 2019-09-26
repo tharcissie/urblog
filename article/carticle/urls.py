@@ -10,7 +10,6 @@ urlpatterns = [
     path('edit/<int:pk>', views.article_update, name='article_edit'),
     path('delete/<int:pk>', views.article_delete, name='article_delete'),
 
-
     path('articles/colleges/<int:pk>', views.ArticleCollege.as_view(), name='article_by_college'),
     path('articles/user/<int:pk>', views.ArticleList.as_view(), name='article_by_user'),
    
