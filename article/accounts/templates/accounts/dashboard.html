@@ -1,0 +1,34 @@
+{% extends 'base_accounts.html' %}
+
+{% load static %}
+
+{% block content%}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+        <table class="table mt-5">
+            <thead class="bg-primary text-white ">
+              <tr>
+                <th scope="col">Subject</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Updated At</th>  
+              </tr>
+            </thead>
+            <tbody>
+                {% for article in object_list %}
+                  <tr>
+                    <td>{{ article.subject }}<br></td>
+                    <td class="text-botton">{{article.created_at }}</td>
+                    <td>{{article.updated_at }}
+                        <div class="float-right">
+                            <a class="btn btn-outline-light mr-4 text-light bg-success align-baseline"  href="{% url 'article_detail' article.id %}">View</a>
+                            <a class="btn btn-outline-light mr-4 text-light bg-warning" href="{% url 'article_edit' article.id %}">Update</a>
+                            <a class="btn btn-outline-light mr-4 text-light bg-danger" href="{% url 'article_delete' article.id %}">Delete</a>
+                        </div>
+                    </td> 
+                  </tr>
+                {% endfor %}
+            </tbody>
+          </table> 
+        </main>
+{% endblock %}
+  
