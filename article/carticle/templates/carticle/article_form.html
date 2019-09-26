@@ -6,16 +6,8 @@
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <!--{{ form.as_p }}-->
-  
+  {{form.media}}
   {% include 'includes/form.html' %}
-  <script>
-      CKEDITOR.replace('message', {
-        allowedContent: ''
-    } );
-
-     
-    </script>
-  
   <div class="mt-5">
   <button type="submit" class=".btn-change-create btn btn-success float-right ">post</button>
   </div>

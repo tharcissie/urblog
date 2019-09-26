@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from crum import get_current_user
 from django_userforeignkey.models.fields import UserForeignKey
 from django.utils.html import mark_safe
+from ckeditor_uploader.fields import RichTextUploadingField
+
 
 
 
@@ -21,7 +22,7 @@ class College(models.Model):
 
 class Article(models.Model):
     subject = models.CharField(max_length=30, unique=True)
-    message = models.TextField()
+    message = RichTextUploadingField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField( auto_now=True, null=True)
     author = UserForeignKey(auto_user_add=True, on_delete=models.CASCADE)
