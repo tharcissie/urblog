@@ -1,8 +1,4 @@
 from django.db import models
-<<<<<<< HEAD
-
-# Create your models here.
-=======
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
@@ -34,4 +30,3 @@ class Profile(models.Model):
 
 
    
->>>>>>> bdda1b0f1608ddf5170c5b27a275bf6e3e3e1b48

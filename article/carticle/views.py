@@ -17,9 +17,6 @@ class ArticleList(ListView):
     model = Article
     template_name = 'carticle/article_list.html'
 
-    # def get_queryset(self): 
-    #     return Article.objects.filter(subject__icontains='hci')
-
     
 
 class ArticleView(DetailView):

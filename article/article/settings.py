@@ -43,7 +43,16 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'carticle',
     'django_userforeignkey',
+    'ckeditor', # for markdown
+    'ckeditor_uploader', # all markdown to upload image 
 ]
+CKEDITOR_UPLOAD_PATH = 'content/ckeditor/' # where the uploaded image by markdown are stored
+CKEDITOR_CONFIGS = {
+    'default': {
+        'width':1100
+    }
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,9 +62,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'crum.CurrentRequestUserMiddleware',
-
-
     'django_userforeignkey.middleware.UserForeignKeyMiddleware',
 ]
 
@@ -132,6 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),

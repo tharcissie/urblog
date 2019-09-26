@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-from django.shortcuts import render
-
-# Create your views here.
-=======
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -45,4 +40,3 @@ def update_profile(request):
 
     return render(request, 'accounts/update_profile.html',{'u_form':u_form, 'p_form':p_form})
 
->>>>>>> bdda1b0f1608ddf5170c5b27a275bf6e3e3e1b48
