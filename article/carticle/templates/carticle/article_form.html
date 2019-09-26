@@ -1,0 +1,29 @@
+{% extends "base_accounts.html" %}
+
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+<h3>Create an Article</h3>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <!--{{ form.as_p }}-->
+  
+  {% include 'includes/form.html' %}
+  <script>
+      CKEDITOR.replace('message', {
+        allowedContent: ''
+    } );
+
+     
+    </script>
+  
+  <div class="mt-5">
+  <button type="submit" class=".btn-change-create btn btn-success float-right ">post</button>
+  </div>
+</form>
+
+</main>
+
+{% endblock %}
+
+
+
