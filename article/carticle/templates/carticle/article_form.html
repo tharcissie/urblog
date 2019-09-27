@@ -2,10 +2,10 @@
 
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-<h3>Create an Article</h3>
+
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  <!--{{ form.as_p }}-->
+  <!-- {{ form.as_p }} -->
   {{form.media}}
   {% include 'includes/form.html' %}
   <div class="mt-5">

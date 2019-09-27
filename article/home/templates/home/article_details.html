@@ -2,8 +2,22 @@
 
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <h5>Subject: {{object.subject}}</h5>
-    Message: {{ object.message|safe }}
+    <div class="row">
+        <div class="col-10">
+    
+    <h5 class="text-center mt-4"> {{object.subject}}</h5>
+    <div  class="mt-4"> {{ object.message|safe}}</div>
+    
+    <div class="row mt-4">
+            <div class="col-4">
+              <strong class="text-muted ">Published by {{ object.author.username }}</strong><br>
+              <strong class="text-muted text-right">On {{ object.created_at }}</strong>
+            </div>
+            
+            <br>
+            </div>
+        </div>
+    </div>
     
     <br><br>
     <hr>
