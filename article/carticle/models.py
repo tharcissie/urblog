@@ -8,9 +8,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 
 
-
-
-
+#####################  creating college model   ######################
 
 class College(models.Model):
     name = models.CharField(max_length=800, unique=True)
@@ -19,6 +17,7 @@ class College(models.Model):
     def __str__(self):
         return self.name
 
+#####################  creating article model   ######################
 
 class Article(models.Model):
     subject = models.CharField(max_length=30, unique=True)
@@ -43,6 +42,7 @@ class Article(models.Model):
     def get_message_as_markdown(self):
         return mark_safe(markdown(self.message, safe_mode='escape'))
 
+#####################  creating comment model   ######################
 
 
 class Comment(models.Model):
@@ -55,12 +55,14 @@ class Comment(models.Model):
 
     def __str__(self):
         return '{}-{}'.format(self.article.subject, str(self.user.username))
-    
+
+#####################  creating image model   ######################
+  
 class Image(models.Model):
     name = models.CharField(max_length=20, unique=True)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
-
+#####################  creating videos model   ######################
 
 class Video(models.Model):
     name = models.CharField(max_length=20, unique=True)

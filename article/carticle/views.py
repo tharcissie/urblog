@@ -1,14 +1,13 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from django.utils.decorators import method_decorator
-# from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
+from django.utils.decorators import method_decorator
 from .models import Article, Comment, College
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 from django.forms import ModelForm
+from django.utils import timezone
 from .forms import *
 
 
@@ -36,10 +35,8 @@ class ArticleDelete(DeleteView):
     model = Article
     success_url = reverse_lazy('article_list')
 
-class ArticleForm(ModelForm):
-    class Meta:
-        model = Article
-        fields = ['subject', 'message','college', 'picture']
+
+
 def article_list(request, template_name='carticle/article_list.html'):
     article = Article.objects.filter(author=request.user)
     data = {}
