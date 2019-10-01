@@ -1,8 +1,15 @@
-from django.contrib.auth import login as auth_login
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
 from .forms import *
 from carticle.models import Article
+from django.shortcuts import render, redirect
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
+
+
+
+
+
+
+#####################     function for rendering signup form on page    ######################
 
 def signup(request):
     if request.method == 'POST':
@@ -15,12 +22,16 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
+#####################     function for rendering the dashboard page   ######################
+
 @login_required
 def dashboard(request):
     article = Article.objects.all()
     data = {}
     data['object_list'] = article
     return render(request, 'accounts/dashboard.html',data)
+
+#####################     function for updating user profile inforamtion and profile picture     ######################
 
 @login_required
 def update_profile(request):
