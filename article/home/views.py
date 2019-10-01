@@ -65,10 +65,10 @@ class SearchResult(ListView):
 
     def get_queryset(self):
         search = self.request.GET.get('query')
+       
         object_list = Article.objects.filter(
 
             Q(subject__icontains=search) | Q(message__icontains=search)
         )
-
         return object_list
         

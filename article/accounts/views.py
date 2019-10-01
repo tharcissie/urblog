@@ -1,7 +1,7 @@
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
+from .forms import *
 from carticle.models import Article
 
 def signup(request):

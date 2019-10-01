@@ -4,6 +4,7 @@ from django.contrib import admin
 
 class CollegeAdmin(admin.ModelAdmin):
     list_display = ('name','description',)
+    search_fields = ('name','description',)
 
 admin.site.register(College, CollegeAdmin)
 

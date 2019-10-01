@@ -41,7 +41,7 @@ class ArticleForm(ModelForm):
         model = Article
         fields = ['subject', 'message','college', 'picture']
 def article_list(request, template_name='carticle/article_list.html'):
-    article = Article.objects.all()
+    article = Article.objects.filter(author=request.user)
     data = {}
     data['object_list'] = article
     return render(request, template_name, data)
@@ -49,8 +49,9 @@ def article_list(request, template_name='carticle/article_list.html'):
 
 
 def article_detail(request, pk, template_name='carticle/article_detail.html'):
-    article = get_object_or_404(Article, pk=pk)
-    comments = Comment.objects.filter(article=article, reply=None).order_by('-id')
+    # article = get_object_or_404(Article, pk=pk)
+    article = Article.objects.get(pk=pk)
+    comments = Comment.objects.filter(article=article , reply=None).order_by('id')
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
