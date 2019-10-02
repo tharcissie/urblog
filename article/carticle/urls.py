@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -9,6 +9,10 @@ urlpatterns = [
     path('delete/<int:pk>', views.article_delete, name='article_delete'),
     path('articles/colleges/<int:pk>', views.ArticleCollege.as_view(), name='article_by_college'),
     path('articles/user/<int:pk>', views.ArticleList.as_view(), name='article_by_user'),
+
+    path('likes/', views.article_like, name='like_article')
+    
+    
    
     
  ]

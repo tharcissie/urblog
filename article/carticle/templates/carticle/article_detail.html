@@ -14,7 +14,22 @@
           <strong class="text-muted ">Published by {{ object.author.username }}</strong><br>
           <strong class="text-muted text-right">On {{ object.created_at }}</strong>
         </div>
-        
+     <div class="col-8">
+         <form action="{% url 'like_article' %}" method="POST">
+           {% csrf_token %}
+           {% if is_liked %}
+           <button type="submit" name="article_id" value="{{ article.id }}" class="btn btn-danger">
+               DisLike
+           </button>
+           {% else %}
+           <button type="submit" name="article_id" value="{{ article.id }}" class="btn btn-primary">
+            Like
+        </button>
+        {% endif %}
+         </form>  
+         {{ total_likes }} Like {{ total_likes|pluralize }}
+         
+     </div>
         <br>
         </div>
     </div>

@@ -19,7 +19,7 @@ class College(models.Model):
 
 #####################  creating article model   ######################
 
-class Article(models.Model):
+class Article( models.Model):
     subject = models.CharField(max_length=30, unique=True)
     message = RichTextUploadingField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
@@ -27,7 +27,7 @@ class Article(models.Model):
     author = UserForeignKey(auto_user_add=True, on_delete=models.CASCADE)
     college = models.ForeignKey(College, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='article_images', default="")
-    # likes = models.ManyToManyField(User, related_name='likes', blank=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
 
     def snippet(self):

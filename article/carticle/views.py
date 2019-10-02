@@ -62,8 +62,26 @@ def article_detail(request, pk, template_name='carticle/article_detail.html'):
              comment.save() 
              return redirect('article_list')
     comment_form = CommentForm()
-    context = { 'object':article, 'comments':comments, 'comment_form':comment_form }  
+
+    
+
+    context = { 'object':article, 'comments':comments, 'comment_form':comment_form, 'is_liked':is_liked, 'total_likes':article.total_likes(),}  
     return render(request, template_name, context)
+
+
+
+def article_like(request):
+    article = get_object_or_404(Article, pk='article_id')
+    is_liked=False
+    if article.likes.filter(pk=request.user.id).exists():
+        article.likes.remove(request.user)
+        is_liked=False
+    else:
+        article.likes.add(request.user)
+        is_liked=True
+    return HttpResponseRedirect(article.get_absolute_url())
+        
+
 
 
 @login_required
