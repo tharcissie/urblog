@@ -3,71 +3,68 @@
 
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-<div class="row">
-    <div class="col-10">
-
-<h5 class="text-center mt-4"> {{object.subject}}</h5>
-<div  class="mt-4"> {{ object.message|safe}}</div>
-
-<div class="row mt-4">
-        <div class="col-4">
-          <strong class="text-muted ">Published by {{ object.author.username }}</strong><br>
-          <strong class="text-muted text-right">On {{ object.created_at }}</strong>
-        </div>
-        
-        <br>
-        </div>
-    </div>
-</div>
-
-
-<br><br>
-<hr>
-
-    <div class="main-comment-section">
-        <div class="container-fluid mt-2">
-            <div class="form-group row">
-                <form method="POST">
-                    {% csrf_token %}
-                    {{ comment_form.as_p }}
-                    
-                        <input type="submit" value="Comment" class="btn btn-outline-success">
-                    
-                </form>
+        <div class="row">
+            <div class="col-10">
+                <h5 class="text-center mt-4"> {{object.subject}}</h5>
+                <div  class="mt-4"> {{ object.message|safe}}</div>
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <strong class="text-muted ">Published by {{ object.author.username }}</strong><br>
+                        <strong class="text-muted text-right">On {{ object.created_at }}</strong>
+                    </div>
+                    <div class="col-4">
+                            <form action="{% url 'article_like' %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" name="article_id" value="{{ article.pk }}" class="btn btn-primary">Like</button>
+                            </form>
+                        </div>
+                    <br>
+                </div>
             </div>
         </div>
-
-        {{ comments.count }} Comment{{ comments|pluralize }}
-        {% for comment in comments %}
-            <blockquote class="blockquote">
-                <p class="mb-0"><small>{{ comment.content }}</small></p>
-                <footer class="blockquote-footer"><small>by<cite title="Source Title">{{ comment.user|capfirst }}</cite></small>
-                    <!-- <button type="button" name="button" class="reply-btn btn btn-outline-dark btn-sm ml-2">Reply</button> -->
-                </footer>
-            </blockquote>
-
-            <div class="replied-comments container mt-2" >
-                {% for reply in comment.replies.all %}
-                    <blockquote class="blockquote">
-                        <p class="mb-0"><small>{{ reply.content }}</small></p>
-                        <footer class="blockquote-footer"><small>by<cite title="Source Title">{{ reply.user|capfirst }}</cite></small>
-                            
-                        </footer>
-                    </blockquote>
-                {% endfor %}
-                <div class="form-group  row">
+        <br><br>
+    <!------------ Section for comments ------------------------->
+        <h4>Leave a comment</h4>
+        <div class="main-comment-section">
+            <div class="container-fluid mt-2">
+                <div class="form-group row">
                     <form method="POST">
                         {% csrf_token %}
-                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
                         {{ comment_form.as_p }}
-                       
-                            <input type="submit" value="Reply" class="btn btn-outline-success">
-                        
-                          
+                        <input type="submit" value="Send" class="btn btn-outline-success">
                     </form>
                 </div>
             </div>
-        {% endfor %}
-    </div>
-</main>
+            <h5>Comments :</h5>
+            {{ comments.count }} Comment{{ comments|pluralize }}
+            {% for comment in comments %}
+                <blockquote class="blockquote">
+                    <p class="mb-0"><small>{{ comment.content }}</small></p>
+                    <footer class="blockquote-footer">commented by : <cite title="Source Title">{{ comment.user.username|capfirst }}</cite>
+                        <!-- <button type="button" name="button" class="reply-btn btn btn-outline-dark btn-sm ml-2">Reply</button> -->
+                    </footer>
+                </blockquote>
+    
+    <!--------------- Section for repling comments -------------->
+    
+                <div class="replied-comments container mt-2 ml-5">
+                    {% for reply in comment.replies.all %}
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><small>{{ reply.content }}</small></p>
+                            <footer class="blockquote-footer">replied by : <cite title="Source Title">{{ reply.user.username|capfirst }}</cite></footer>
+                        </blockquote>
+                       
+                    {% endfor %}
+                    <div class="form-group  row">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                            {{ comment_form.as_p }}
+                            <input type="submit" value="Reply" class="btn btn-outline-success">
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
 {% endblock %}

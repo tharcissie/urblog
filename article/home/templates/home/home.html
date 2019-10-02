@@ -9,28 +9,33 @@
 <!------------ Section for tags --------------------------->
 
 {% block content %}
-<div class="container-fluid">
-  <div class="row mt-3 mb-3">
-    <div class="col-md-2">
-        <a href="#"> <p>#networking</p> </a> 
-    </div>
-    <div class="col-md-2">
-        <a href="#">  <p>#programing</p> </a> 
-    </div>
-    <div class="col-md-2">
-        <a href="#"> <p>#cybersec</p> </a> 
+<div class="row mt-3 mb-3">
+    <div class="col-lg-8">
+        <div class="row">
+                    <div class="col-md-2">
+                        <a href="#"> <p>#networking</p> </a> 
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#"><p>#networking</p> </a> 
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#"> <p>#cybersec</p> </a> 
+                    </div>
+        </div>
     </div>
 
 <!----------- Section for search field ----------------------->
 
-    <div class="col-md-6">
-      <form action="{% url 'search_result' %}" method="get" class="form-inline my-4 my-lg-0">
-          <input type="search" name="query" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
-          <button type="submit" class="btn btn-outline-success my-2 my-sm-0" >Search</button>
-      </form>
+<div class="col-lg-4">
+        <!-- <div class="row"> -->
+                <form action="{% url 'search_result' %}" method="get" class="form-inline my-4 my-lg-0">
+                        <input type="search" name="query" class="form-control mr-sm-2" placeholder="Search......" aria-label="Search">
+                        <button type="submit" class="btn_search btn btn-outline-success my-2 my-sm-0" style=" background: #029ddd !important; color: #fff;font-weight: 900;">Go!</button>
+                    </form>
+        <!-- </div> -->
     </div>
-  </div>
 </div>
+  
 
 <!----------- Section for jumbotron ----------------------->
 
@@ -55,8 +60,8 @@
                             <p class="card-image"> <img src="{{ articles.picture.url}}" alt="" width="210px" height="100px"> </p>
                                   <!-- <p class="card-text">{{ articles.snippet }}</p> -->
                             <p class="card-text"> <hr> </p>
-                            <p class="card-text">wednesday ,August 14, 2019</p>
-                            <p class="card-text">Publisher:{{ articles.author }}</p>
+                            <p class="card-text">{{ articles.created_at }}</p>
+                            <p class="card-text">Publisher:  {{ articles.author }}</p>
                             <a href="{% url 'article_by_college' articles.college.pk %}"><p>{{ articles.college }}</p></a>
                                   
                         </div>
