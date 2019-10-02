@@ -52,7 +52,7 @@ def article_detail(request, pk, template_name='carticle/article_detail.html'):
     article = get_object_or_404(Article, pk=pk)
 
     is_liked=False
-    if article.likes.filter(id=request.user.id).exists():
+    if article.likes.filter(pk=request.user.id).exists():
         article.likes.remove(request.user)
         is_liked=True
 
@@ -80,9 +80,9 @@ def article_detail(request, pk, template_name='carticle/article_detail.html'):
 
 
 def article_like(request):
-    article = get_object_or_404(Article, id= request.POST.get('article_id'))
+    article = get_object_or_404(Article, pk='article_id')
     is_liked=False
-    if article.likes.filter(id=request.user.id).exists():
+    if article.likes.filter(pk=request.user.id).exists():
         article.likes.remove(request.user)
         is_liked=False
     else:
