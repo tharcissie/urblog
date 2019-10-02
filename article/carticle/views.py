@@ -1,14 +1,13 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from django.utils.decorators import method_decorator
-# from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
+from django.utils.decorators import method_decorator
 from .models import Article, Comment, College
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 from django.forms import ModelForm
+from django.utils import timezone
 from .forms import *
 
 
@@ -36,12 +35,10 @@ class ArticleDelete(DeleteView):
     model = Article
     success_url = reverse_lazy('article_list')
 
-class ArticleForm(ModelForm):
-    class Meta:
-        model = Article
-        fields = ['subject', 'message','college', 'picture']
+
+
 def article_list(request, template_name='carticle/article_list.html'):
-    article = Article.objects.all()
+    article = Article.objects.filter(author=request.user)
     data = {}
     data['object_list'] = article
     return render(request, template_name, data)
@@ -49,15 +46,9 @@ def article_list(request, template_name='carticle/article_list.html'):
 
 
 def article_detail(request, pk, template_name='carticle/article_detail.html'):
-    article = get_object_or_404(Article, pk=pk)
-
-    is_liked=False
-    if article.likes.filter(pk=request.user.id).exists():
-        article.likes.remove(request.user)
-        is_liked=True
-
-
-    comments = Comment.objects.filter(article=article, reply=None).order_by('-id')
+    # article = get_object_or_404(Article, pk=pk)
+    article = Article.objects.get(pk=pk)
+    comments = Comment.objects.filter(article=article , reply=None).order_by('id')
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
