@@ -1,5 +1,6 @@
 {% extends "base_accounts.html" %}
 
+{% load humanize %}
 
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -39,19 +40,23 @@
             {{ comments.count }} Comment{{ comments|pluralize }}
             {% for comment in comments %}
                 <blockquote class="blockquote">
-                    <p class="mb-0"><small>{{ comment.content }}</small></p>
+                    
+                    <p class="mb-0" style="border: 2px solid #029ddd ;padding: 7px;"><small>{{ comment.content }}</small></p>
                     <footer class="blockquote-footer">commented by : <cite title="Source Title">{{ comment.user.username|capfirst }}</cite>
                         <!-- <button type="button" name="button" class="reply-btn btn btn-outline-dark btn-sm ml-2">Reply</button> -->
+                        <p>{{ comment.timestamp|naturaltime }}</p>
                     </footer>
                 </blockquote>
     
     <!--------------- Section for repling comments -------------->
     
-                <div class="replied-comments container mt-2 ml-5">
+                <div class="replied-comments container mt-2 ml-2">
                     {% for reply in comment.replies.all %}
                         <blockquote class="blockquote">
-                            <p class="mb-0"><small>{{ reply.content }}</small></p>
-                            <footer class="blockquote-footer">replied by : <cite title="Source Title">{{ reply.user.username|capfirst }}</cite></footer>
+                            <p class="mb-0" style="border: 2px solid #029ddd ;padding: 7px;"><small>{{ reply.content }}</small></p>
+                            <footer class="blockquote-footer">replied by : <cite title="Source Title">{{ reply.user.username|capfirst }}</cite>
+                                <p>{{ reply.timestamp|naturaltime }}</p>
+                            </footer>
                         </blockquote>
                        
                     {% endfor %}
