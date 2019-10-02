@@ -20,7 +20,7 @@ class College(models.Model):
         return self.name
 
 
-class Article(models.Model):
+class Article( models.Model):
     subject = models.CharField(max_length=30, unique=True)
     message = RichTextUploadingField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
@@ -28,7 +28,7 @@ class Article(models.Model):
     author = UserForeignKey(auto_user_add=True, on_delete=models.CASCADE)
     college = models.ForeignKey(College, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='article_images', default="")
-    # likes = models.ManyToManyField(User, related_name='likes', blank=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
 
     def snippet(self):
@@ -43,7 +43,9 @@ class Article(models.Model):
     def get_message_as_markdown(self):
         return mark_safe(markdown(self.message, safe_mode='escape'))
 
-
+    def total_likes(self):
+        return self.likes.count()
+    
 
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)

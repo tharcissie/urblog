@@ -1,5 +1,5 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -50,6 +50,13 @@ def article_list(request, template_name='carticle/article_list.html'):
 
 def article_detail(request, pk, template_name='carticle/article_detail.html'):
     article = get_object_or_404(Article, pk=pk)
+
+    is_liked=False
+    if article.likes.filter(id=request.user.id).exists():
+        article.likes.remove(request.user)
+        is_liked=True
+
+
     comments = Comment.objects.filter(article=article, reply=None).order_by('-id')
 
     if request.method == 'POST':
@@ -64,8 +71,26 @@ def article_detail(request, pk, template_name='carticle/article_detail.html'):
              comment.save() 
              return redirect('article_list')
     comment_form = CommentForm()
-    context = { 'object':article, 'comments':comments, 'comment_form':comment_form }  
+
+    
+
+    context = { 'object':article, 'comments':comments, 'comment_form':comment_form, 'is_liked':is_liked, 'total_likes':article.total_likes(),}  
     return render(request, template_name, context)
+
+
+
+def article_like(request):
+    article = get_object_or_404(Article, id= request.POST.get('article_id'))
+    is_liked=False
+    if article.likes.filter(id=request.user.id).exists():
+        article.likes.remove(request.user)
+        is_liked=False
+    else:
+        article.likes.add(request.user)
+        is_liked=True
+    return HttpResponseRedirect(article.get_absolute_url())
+        
+
 
 
 @login_required
