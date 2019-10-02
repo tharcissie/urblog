@@ -1,8 +1,13 @@
+.btn_search{
+    background: #029ddd !important; 
+    color: #fff;
+    font-weight: 900;
+}
 .jumbotron {
     background-image: url('../img/backgroundblue.png');
   }
 
-
+ 
 
 .content1 ul{
     list-style: none;

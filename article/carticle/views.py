@@ -12,6 +12,7 @@ from .forms import *
 
 
 
+
 class ArticleList(ListView):
     model = Article
     template_name = 'carticle/article_list.html'
@@ -48,7 +49,7 @@ def article_list(request, template_name='carticle/article_list.html'):
 def article_detail(request, pk, template_name='carticle/article_detail.html'):
     # article = get_object_or_404(Article, pk=pk)
     article = Article.objects.get(pk=pk)
-    comments = Comment.objects.filter(article=article , reply=None).order_by('id')
+    comments = Comment.objects.filter(article=article , reply=None).order_by('-id')
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
@@ -71,18 +72,10 @@ def article_detail(request, pk, template_name='carticle/article_detail.html'):
 
 
 def article_like(request):
-    article = get_object_or_404(Article, pk='article_id')
-    is_liked=False
-    if article.likes.filter(pk=request.user.id).exists():
-        article.likes.remove(request.user)
-        is_liked=False
-    else:
+    if request.method == 'POST':
+        article = Article.objects.get(pk=request.POST.get('article_id'))
         article.likes.add(request.user)
-        is_liked=True
-    return HttpResponseRedirect(article.get_absolute_url())
-        
-
-
+        return redirect('article_list')
 
 @login_required
 def article_create(request, template_name='carticle/article_form.html'):
@@ -109,7 +102,7 @@ def article_delete(request, pk, template_name='carticle/article_confirm_delete.h
         return redirect('article_list')
     return render(request, template_name, {'object':article})
 
-
+        
 class ArticleCollege(ListView):
     model = Article
     template_name = 'carticle/colleges.html'
