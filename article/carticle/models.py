@@ -19,7 +19,7 @@ class College(models.Model):
 
 #####################  creating article model   ######################
 
-class Article(models.Model):
+class Article( models.Model):
     subject = models.CharField(max_length=30, unique=True)
     message = RichTextUploadingField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True)

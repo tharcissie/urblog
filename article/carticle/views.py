@@ -63,7 +63,10 @@ def article_detail(request, pk, template_name='carticle/article_detail.html'):
              comment.save() 
              return redirect('article_list')
     comment_form = CommentForm()
-    context = { 'object':article, 'comments':comments, 'comment_form':comment_form }  
+
+    
+
+    context = { 'object':article, 'comments':comments, 'comment_form':comment_form, 'is_liked':is_liked, 'total_likes':article.total_likes(),}  
     return render(request, template_name, context)
 
 
