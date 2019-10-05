@@ -22,11 +22,11 @@ class College(models.Model):
 class Article( models.Model):
     subject = models.CharField(max_length=30, unique=True)
     message = RichTextUploadingField(blank=True, null=True)
+    author = UserForeignKey(auto_user_add=True, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField( auto_now=True, null=True)
-    author = UserForeignKey(auto_user_add=True, on_delete=models.CASCADE)
     college = models.ForeignKey(College, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='article_images', default="")
+    picture = models.ImageField(upload_to='article_images', default="") #### here
     likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
 
@@ -48,7 +48,7 @@ class Article( models.Model):
 class Comment(models.Model):
     article     = models.ForeignKey(Article, on_delete=models.CASCADE)
     user        = models.ForeignKey(User, on_delete=models.CASCADE, default="")
-    reply       = models.ForeignKey('Comment', null=True, related_name='replies', on_delete=models.CASCADE)
+    reply       = models.ForeignKey('Comment', null=True, related_name='replies', on_delete=models.CASCADE) ## here
     content     = models.TextField(max_length = 160, default="")
     timestamp   = models.DateTimeField(auto_now_add=True)
 
