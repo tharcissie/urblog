@@ -3,6 +3,10 @@
 
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+
+   
+    
 <table class="table mt-5">
     <thead class="bg-primary text-white ">
       <tr>
@@ -23,12 +27,17 @@
                     <a class="btn btn-outline-light mr-4 text-light bg-danger" href="{% url 'article_delete' article.id %}">Delete</a>
                 </div>
             </td> 
+
           </tr>
+         
+          
         {% endfor %}
+        
     </tbody>
   </table> 
   
-
+  
+  
 </main>
 
 {% endblock %}

@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['subject', 'message','college', 'picture']
+        fields = ['subject', 'message','college', 'picture', 'tags']
 
 #####################  form for creating comment   ######################
 
