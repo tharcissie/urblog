@@ -3,13 +3,32 @@ from django.db.models import Q
 from django.forms import ModelForm
 from django.urls import reverse_lazy
 from carticle.models import Article, Comment
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, RedirectView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
+from taggit.models import Tag
+
+class TagMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(TagMixin, self).get_context_data(**kwargs)
+        context['tags']=Tag.objects.all()
+        return context
+    
 
 
 class ArticleList(ListView):
     model = Article
+    template_name = "home/home.html"
+
+
+    
+class TagListView(ListView):
+    model = Article
+    def get_queryset(self):
+        return Article.objects.filter(tags__slug=self.kwargs.get('slug'))
+
+    
+
 
 class ArticleView(DetailView):
     model = Article
@@ -29,8 +48,8 @@ def home(request):
 #################     function of article details and comment stuff     ###################
 
 def article_details(request, pk, template_name='home/article_details.html'):
-    # article = get_object_or_404(Article, pk=pk)
-    article = Article.objects.get(pk=pk)
+    article = get_object_or_404(Article, pk=pk)
+    # article = Article.objects.get(pk=pk)
     comments = Comment.objects.filter(article=article , reply=None).order_by('id')
 
     if request.method == 'POST':
@@ -62,4 +81,35 @@ class SearchResult(ListView):
             Q(subject__icontains=search) | Q(message__icontains=search)
         )
         return object_list
-        
+
+class ArticleLikeToggle(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        pk = self.kwargs.get("pk")
+        print(pk)
+        obj = get_object_or_404(Article, pk=pk)
+        url_= obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated:
+            if user in obj.likes.all():
+                obj.likes.remove(user)
+            else:
+                obj.likes.add(user)
+        return url_
+
+
+
+class ArticleDislikeToggle(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        pk = self.kwargs.get("pk")
+        print(pk)
+        ob = get_object_or_404(Article, pk=pk)
+        urll_= ob.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated:
+            if user in ob.dislikes.all():
+                ob.dislikes.remove(user)
+            else:
+                ob.dislikes.add(user)
+        return urll_
+
+

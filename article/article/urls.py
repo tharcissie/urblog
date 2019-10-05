@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf import settings
 from django.contrib import admin
-from accounts import views
+
 
 urlpatterns = [
     
@@ -12,6 +12,7 @@ urlpatterns = [
     path('account/', include('accounts.urls')),
     path('articles/', include('carticle.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    
    
     
    

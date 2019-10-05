@@ -22,7 +22,14 @@ admin.site.register(Comment, CommentAdmin)
 #####################     registering college model on admin dashboard    ######################
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('subject','message','created_at','updated_at','author','college',)
+    list_display = ('subject','message','created_at','updated_at','author','college', 'tag_list')
+    
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('tags')
+
+    def tag_list(self, obj):
+        return u", ".join(o.name for o in obj.tags.all())
     
 admin.site.register(Article, ArticleAdmin)
 

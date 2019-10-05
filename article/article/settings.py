@@ -45,10 +45,10 @@ INSTALLED_APPS = [
     'django_userforeignkey',
     'ckeditor', # for markdown
     'ckeditor_uploader', # all markdown to upload image 
-    
+    'taggit',
 ]
 
-
+TAGGIT_CASE_INSENSITIVE = True
 CKEDITOR_UPLOAD_PATH = 'content/ckeditor/' # where the uploaded image by markdown are stored
 CKEDITOR_CONFIGS = {
     

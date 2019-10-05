@@ -12,6 +12,7 @@ psycopg2 = "*"
 django-widget-tweaks = "*"
 django-userforeignkey = "*"
 django-ckeditor = "*"
+django-taggit = "*"
 
 [requires]
 python_version = "3.7"

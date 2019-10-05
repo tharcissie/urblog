@@ -1,7 +1,7 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, RedirectView
 from django.utils.decorators import method_decorator
 from .models import Article, Comment, College
 from django.urls import reverse_lazy
@@ -9,33 +9,40 @@ from django.http import HttpResponse
 from django.forms import ModelForm
 from django.utils import timezone
 from .forms import *
+# from taggit.models import Tag
 
 
-
-
-class ArticleList(ListView):
-    model = Article
-    template_name = 'carticle/article_list.html'
-
+# class TagMixin(object):
+#     def get_context_data(self, **kwargs):
+#          context = super(TagMixin, self).get_context_data(**kwargs)
+#          context['tags']=Tag.objects.all()
+#          return context
     
+# class ArticleList(ListView):
+#     model = Article
+    
+# class TagListView(TagMixin,ListView):
+#     model = Article
+#     def get_queryset(self):
+#         return Article.objects.filter(tags__name=self.kwargs.get('slug'))
+   
 
 class ArticleView(DetailView):
     model = Article
 
 class ArticleCreate(CreateView):
     model = Article
-    fields = ['subject', 'message', 'picture' ]
+    fields = ['subject', 'message', 'picture' , 'tags']
     success_url = reverse_lazy('article_list')
 
 class ArticleUpdate(UpdateView):
     model = Article
-    fields = ['subject', 'message', 'picture']
+    fields = ['subject', 'message', 'picture', 'tags']
     success_url = reverse_lazy('article_list')
 
 class ArticleDelete(DeleteView):
     model = Article
     success_url = reverse_lazy('article_list')
-
 
 
 def article_list(request, template_name='carticle/article_list.html'):
@@ -45,10 +52,9 @@ def article_list(request, template_name='carticle/article_list.html'):
     return render(request, template_name, data)
 
 
-
 def article_detail(request, pk, template_name='carticle/article_detail.html'):
-    # article = get_object_or_404(Article, pk=pk)
-    article = Article.objects.get(pk=pk)
+    article = get_object_or_404(Article, pk=pk)
+    # article = Article.objects.get(pk=pk)
     comments = Comment.objects.filter(article=article , reply=None).order_by('-id')
 
     if request.method == 'POST':
@@ -63,23 +69,46 @@ def article_detail(request, pk, template_name='carticle/article_detail.html'):
              comment.save() 
              return redirect('article_list')
     comment_form = CommentForm()
-
-    
-
-    context = { 'object':article, 'comments':comments, 'comment_form':comment_form, 'is_liked':is_liked, 'total_likes':article.total_likes(),}  
+    context = { 'object':article, 'comments':comments, 'comment_form':comment_form}  
     return render(request, template_name, context)
 
+## section of like view
+class ArticleLikeToggle(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        pk = self.kwargs.get("pk")
+        print(pk)
+        obj = get_object_or_404(Article, pk=pk)
+        url_= obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated:
+            if user in obj.likes.all():
+                obj.likes.remove(user)
+            else:
+                obj.likes.add(user)
+        return  url_
 
 
-def article_like(request):
-    if request.method == 'POST':
-        article = Article.objects.get(pk=request.POST.get('article_id'))
-        article.likes.add(request.user)
-        return redirect('article_list')
+##section of dislike view
+class ArticleDislikeToggle(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        pk = self.kwargs.get("pk")
+        print(pk)
+        ob = get_object_or_404(Article, pk=pk)
+        urll_= ob.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated:
+            if user in ob.dislikes.all():
+                ob.dislikes.remove(user)
+            else:
+                ob.dislikes.add(user)
+        return urll_
+
+
+
 
 @login_required
 def article_create(request, template_name='carticle/article_form.html'):
-    form = ArticleForm(request.POST,files=request.FILES)
+    form = ArticleForm(request.POST or None ,files=request.FILES)
     if form.is_valid():
         form.save()
         return redirect('article_list')
@@ -87,8 +116,9 @@ def article_create(request, template_name='carticle/article_form.html'):
 
 @login_required
 def article_update(request, pk, template_name='carticle/article_form.html'):
-    article= get_object_or_404(Article, pk=pk)
-    form = ArticleForm(request.POST,files=request.FILES, instance=article)
+    # article= get_object_or_404(Article, pk=pk)
+    article = Article.objects.get(pk=pk)
+    form = ArticleForm(request.POST or None,files=request.FILES, instance=article)
     if form.is_valid():
         form.save()
         return redirect('article_list')
