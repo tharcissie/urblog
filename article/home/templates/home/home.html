@@ -78,7 +78,7 @@
 
                 <div class="col-md-4 mt-3 left">
                             {% for tag in articles.tags.all %} 
-                            <p><a class="inline" href="{% url 'tagged' tag.slug %}">#{{ tag.name }} </p> </a>            
+                           <div class="col"><a class="inline" href="{% url 'tagged' tag.slug %}">#{{ tag.name }}</a></div>           
                                 {% endfor %}
 
                                 <div class="card mb-4">
@@ -117,7 +117,6 @@
             <h4>Most rated articles</h4>
                 <div class="card">
                     <div class="card-body">
-                        zzzzzzzzzzzzzzzzzzzzzzzzzzzzz
                         <a href="https://us4.admin.mailchimp.com/lists/members?id=328261&previewName=Subscribers#p:1-s:25-so:null">admin check subscriber list</a>
                         <a href="https://us4.admin.mailchimp.com/reports/#t:campaigns-list">subscriber general report</a>
                         <hr>

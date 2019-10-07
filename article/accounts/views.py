@@ -16,7 +16,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            auth_login(request, user)
+            auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('login')
     else:
         form = SignUpForm()
@@ -26,7 +26,7 @@ def signup(request):
 
 @login_required
 def dashboard(request):
-    article = Article.objects.all()
+    article = Article.objects.filter(author=request.user)
     data = {}
     data['object_list'] = article
     return render(request, 'accounts/dashboard.html',data)

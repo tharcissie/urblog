@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Application definition
 
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.sites',#social account
     'home',
     'accounts',
     'widget_tweaks',
@@ -45,8 +47,23 @@ INSTALLED_APPS = [
     'django_userforeignkey',
     'ckeditor', # for markdown
     'ckeditor_uploader', # all markdown to upload image 
-    'taggit',
+    'taggit',# for tagging
+
+    #for logging in with social accounts
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+      #providers
+    
+    'allauth.socialaccount.providers.google',
+    
 ]
+
+
+
+
 
 TAGGIT_CASE_INSENSITIVE = True
 CKEDITOR_UPLOAD_PATH = 'content/ckeditor/' # where the uploaded image by markdown are stored
@@ -157,3 +174,20 @@ MEDIA_URL = '/media/'
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
+
+#django-allauth config
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+
+)
+
+SOCIALACCOUNT_LOGIN_REDIRECT = '/'
+SOCIALACCOUNT_LOGOUT_REDIRECT = '/'
+
+

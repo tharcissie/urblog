@@ -82,8 +82,9 @@
         </h6>
 
         <ul class="nav flex-column mb-2">
+   <!------------------ for viewing all articles created in project --------------->
           <li class="nav-item">
-                <a class="nav-link" href="{% url 'dashboard' %}">
+                <a class="nav-link" href="{% url 'dashboard'  %}">    
                   
                     <i class="far fa-user-circle fa-lg"></i>
                   Dashboard
@@ -95,10 +96,12 @@
               Create an Article
             </a>
           </li>
+          <!---------------- for viewing all articles created  by a certain lecturer in project ---------------->
+
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'article_list' %}">
+            <a class="nav-link" href="{% url 'article_list' %}">       
                 <i class="fas fa-align-justify fa-lg"></i>
-              View Created Articles
+              View all Articles
             </a>
           </li>
         </ul>

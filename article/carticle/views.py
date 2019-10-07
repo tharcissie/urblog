@@ -46,7 +46,8 @@ class ArticleDelete(DeleteView):
 
 
 def article_list(request, template_name='carticle/article_list.html'):
-    article = Article.objects.filter(author=request.user)
+    article = Article.objects.all()
+    
     data = {}
     data['object_list'] = article
     return render(request, template_name, data)
