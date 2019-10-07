@@ -72,7 +72,7 @@ def article_detail(request, pk, template_name='carticle/article_detail.html'):
     context = { 'object':article, 'comments':comments, 'comment_form':comment_form}  
     return render(request, template_name, context)
 
-## section of like view
+################################## section of like view  ##################################
 class ArticleLikeToggle(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
@@ -88,7 +88,7 @@ class ArticleLikeToggle(RedirectView):
         return  url_
 
 
-##section of dislike view
+##############################################  section of dislike view  ###############################
 class ArticleDislikeToggle(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         pk = self.kwargs.get("pk")

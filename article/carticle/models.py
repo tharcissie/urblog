@@ -67,17 +67,9 @@ class Comment(models.Model):
     def __str__(self):
         return '{}-{}'.format(self.article.subject, str(self.user.username))
 
-#####################  creating image model   ######################
+
   
-class Image(models.Model):
-    name    = models.CharField(max_length=20, unique=True)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
-#####################  creating videos model   ######################
-
-class Video(models.Model):
-    name    = models.CharField(max_length=20, unique=True)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
 
 
