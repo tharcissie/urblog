@@ -59,7 +59,7 @@ class Article( models.Model):
 
 class Comment(models.Model):
     article     = models.ForeignKey(Article, on_delete=models.CASCADE)
-    user        = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    user        = UserForeignKey(auto_user_add=True, on_delete=models.CASCADE)
     reply       = models.ForeignKey('Comment', null=True, related_name='replies', on_delete=models.CASCADE)
     content     = models.TextField(max_length = 160, default="")
     timestamp   = models.DateTimeField(auto_now_add=True)

@@ -16,14 +16,15 @@ class TagMixin(object):
     
 
 
-class ArticleList(ListView):
-    model = Article
-    template_name = "home/home.html"
+# class ArticleList(TagMixin,ListView):
+#     model = Article
+#     template_name = "home/home.html"
 
 
     
-class TagListView(ListView):
+class TagListView(TagMixin,ListView):
     model = Article
+    template_name = "home/tag.html"
     def get_queryset(self):
         return Article.objects.filter(tags__slug=self.kwargs.get('slug'))
 
