@@ -59,10 +59,12 @@
              <a class="nav-link text-light" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
            </li>
          </ul>
-       
+       {% if user.is_authenticated %}
+       <p class="text-light">{{user.username}}</p>
+       {% else %}
              <a class="btn btn-outline-primary mr-4 text-light login" href="{% url 'login' %}">Log in</a>
              <a class="btn btn-outline-primary text-light signup" href="{% url 'signup' %}">Sign up</a>
-           
+           {% endif %}
        </div>   
        
      </nav>
