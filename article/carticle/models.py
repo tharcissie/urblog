@@ -37,8 +37,7 @@ class Article( models.Model):
     def __str__(self):
         return self.subject
 
-    # def get_absolute_url(self):
-    #     return reverse('article_detail', kwargs={'pk': self.pk})
+#   def highrated(request):
    
     def get_absolute_url(self):
         return reverse('article_details', kwargs={'pk': self.pk})
@@ -67,17 +66,9 @@ class Comment(models.Model):
     def __str__(self):
         return '{}-{}'.format(self.article.subject, str(self.user.username))
 
-#####################  creating image model   ######################
+
   
-class Image(models.Model):
-    name    = models.CharField(max_length=20, unique=True)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
-#####################  creating videos model   ######################
-
-class Video(models.Model):
-    name    = models.CharField(max_length=20, unique=True)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
 
 

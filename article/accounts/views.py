@@ -26,7 +26,7 @@ def signup(request):
 
 @login_required
 def dashboard(request):
-    article = Article.objects.all()
+    article = Article.objects.filter(author=request.user)
     data = {}
     data['object_list'] = article
     return render(request, 'accounts/dashboard.html',data)

@@ -10,6 +10,7 @@ from django.forms import ModelForm
 from django.utils import timezone
 from .forms import *
 
+   
 
 class ArticleView(DetailView):
     model = Article
@@ -30,7 +31,8 @@ class ArticleDelete(DeleteView):
 
 
 def article_list(request, template_name='carticle/article_list.html'):
-    article = Article.objects.filter(author=request.user)
+    article = Article.objects.all()
+    
     data = {}
     data['object_list'] = article
     return render(request, template_name, data)
@@ -56,7 +58,7 @@ def article_detail(request, pk, template_name='carticle/article_detail.html'):
     context = { 'object':article, 'comments':comments, 'comment_form':comment_form}  
     return render(request, template_name, context)
 
-## section of like view
+################################## section of like view  ##################################
 class ArticleLikeToggle(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
@@ -72,7 +74,7 @@ class ArticleLikeToggle(RedirectView):
         return  url_
 
 
-##section of dislike view
+##############################################  section of dislike view  ###############################
 class ArticleDislikeToggle(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
