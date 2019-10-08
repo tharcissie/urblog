@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load socialaccount%}
+
 {% load humanize %}
 
 {% block content %}
@@ -16,10 +18,13 @@
                     
     <!------------ Section for Likes ------------------------->
     <div class="col-4">
-            <a href="{{ object.get_like_url}}">
-   <i class="e fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i></a>{{  object.likes.count }}
-           <a href="{{ object.get_dislike_url}}">
-   <i class="a fa fa-thumbs-o-down fa-2x" aria-hidden="true"></i></a>{{  object.dislikes.count }}
+    {% if user.is_authenticated %}
+    <a href="{{ object.get_like_url}}"> <i class="e fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i></a>{{  object.likes.count }}
+    <a href="{{ object.get_dislike_url}}"><i class="a fa fa-thumbs-o-down fa-2x" aria-hidden="true"></i></a>{{  object.dislikes.count }}
+    {%else%}
+    <a href="{% provider_login_url "google" %}?next={{ request.get_full_path }}"> <i class="e fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i></a>{{  object.likes.count }}
+    <a href="{% provider_login_url "google" %}?next={{ request.get_full_path }}"><i class="a fa fa-thumbs-o-down fa-2x" aria-hidden="true"></i></a>{{  object.dislikes.count }}
+    {%endif%}
    <i  class="o fa fa-comment-o fa-2x" aria-hidden="true"></i></a>{{ comments.count }}
         </div> 
 
@@ -40,7 +45,12 @@
                     <form method="POST">
                         {% csrf_token %}
                         {{ comment_form.as_p }}
+                        {% if user.is_authenticated%}
                         <input type="submit" value="Send" class="btn btn-outline-success">
+                        {%else%}
+                        <button><a href="{% provider_login_url "google" %}?next={{ request.get_full_path }}">comment</a> </button>
+                        
+                        {% endif %}
                     </form>
                 </div>
             </div>
