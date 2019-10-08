@@ -37,8 +37,7 @@ class Article( models.Model):
     def __str__(self):
         return self.subject
 
-    # def get_absolute_url(self):
-    #     return reverse('article_detail', kwargs={'pk': self.pk})
+#   def highrated(request):
    
     def get_absolute_url(self):
         return reverse('article_details', kwargs={'pk': self.pk})

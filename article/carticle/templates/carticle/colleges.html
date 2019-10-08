@@ -6,20 +6,18 @@
     </div>
 <div class="row">
     {% for articles in article_list %}
-    <div class="col-md-4 mt-3 left">
-          <div class="card mb-4">
-              <div class="card-body">
-                  <a href="{% url 'article_details' articles.id %}"><h4 class="card-title text-primary">{{ articles.subject }}</h4></a>
-                  <p class="card-image"> <img src=" img/logo.png " alt=".....image" > </p>
-                  <!-- <p class="card-text">{{ articles.snippet }}</p> -->
-                  <p class="card-text"> <hr> </p>
-                  <p class="card-text">wednesday ,August 14, 2019</p>
-                  <p class="card-text">Publisher:{{ articles.author }}</p>
-                  <a href="{% url 'article_by_college' articles.college.pk %}"><p>{{ articles.college }}</p></a>
-                  
-              </div>
-          </div>
-      </div>
+
+      <div class="card mb-4 ml-2 ">
+            <div class="card-body">
+                <a href="{% url 'article_details' articles.id %}"><h4 class="card-title text-primary">{{ articles.subject }}</h4></a>
+                <p class="card-image"> <img src="{{ articles.picture.url}}" alt="" width="210px" height="100px"> </p>
+                <p class="card-text"> <hr> </p>
+                <small><p class="card-text">{{ articles.created_at }}</p></small>
+                <small><p class="card-text">Publisher:  {{ articles.author }}</p></small>
+                <small><a href="{% url 'article_by_college' articles.college.pk %}"><p>{{ articles.college }}</p></a></small>
+
+            </div>
+        </div>
       {% endfor %}
 </div>
 
