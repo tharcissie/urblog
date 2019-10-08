@@ -93,18 +93,18 @@
                             <p class="card-image"> <img src="{{ articles.picture.url}}" alt="" width="210px" height="100px"> </p>
                                   <!-- <p class="card-text">{{ articles.snippet }}</p> -->
                             <p class="card-text"> <hr> </p>
-                            <small><p class="card-text">{{ articles.created_at }}</p></small>
-                            <small><p class="card-text">Publisher:  {{ articles.author }}</p></small>
-                            <small><a href="{% url 'article_by_college' articles.college.pk %}"><p>{{ articles.college }}</p></a></small>
+                            <small><p class="card-text text-muted">{{ articles.created_at }}</p></small>
+                            <small><p class="card-text text-muted">Publisher:  {{ articles.author }}</p></small>
+                           <br>
 
                                    <!-- section of likes and comments icon -->
                          <div class="row ">
                         
-                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>{{  articles.likes.count }}
+                        <i class="fa fa-thumbs-o-up text-muted" aria-hidden="true"></i>{{  articles.likes.count }}
                         
-                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>{{  articles.dislikes.count }}
+                        <i class="fa fa-thumbs-o-down text-muted" aria-hidden="true"></i>{{  articles.dislikes.count }}
                          
-                        <i  class="fa fa-comment-o " aria-hidden="true"></i>{{ comments.count }}
+                        <i  class="fa fa-comment-o text-muted" aria-hidden="true"></i>{{ comments.count }}
                        
                         </div> 
 

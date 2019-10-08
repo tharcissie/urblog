@@ -1,5 +1,6 @@
 {% extends "base_accounts.html" %}
 {% load humanize %}
+{% load socialaccount%}
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="row">
@@ -67,7 +68,11 @@
                             {% csrf_token %}
                             <input type="hidden" name="comment_id" value="{{ comment.id }}">
                             {{ comment_form.as_p }}
+                            {% if user.is_authenticated%}
                             <input type="submit" value="Reply" class="btn btn-outline-success">
+                            {%else%}
+                            <button><a href="{% provider_login_url "google" %}?next={{ request.get_full_path }}">reply</a> </button>
+                            {% endif %}
                         </form>
                     </div>
                 </div>
