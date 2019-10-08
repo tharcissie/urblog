@@ -60,7 +60,25 @@
            </li>
          </ul>
        {% if user.is_authenticated %}
-       <p class="text-light">{{user.username}}</p>
+       <!-- <a style="color:#fff;" href="{% url 'dashboard' %}">Dashboard</a> -->
+       <div class="w-0 mt-2" >
+          <ul class="dashboard-username">
+            <li style="color: white;
+            font-size: 15px;
+            list-style: none;
+            float: right;
+            margin-inline-end: 10px;">
+                <i class="far fa-user fa-lg"></i>
+              Weclome {{ user.username }}</li>
+          </ul>
+        </div>
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a style="color: #fff" class="nav-link nav-link-logout " href="{% url 'logout' %}">
+                <i class="fas fa-sign-out-alt fa-lg"></i>
+              Logout</a>
+          </li>
+        </ul>
        {% else %}
              <a class="btn btn-outline-primary mr-4 text-light login" href="{% url 'login' %}">Log in</a>
              <a class="btn btn-outline-primary text-light signup" href="{% url 'signup' %}">Sign up</a>
