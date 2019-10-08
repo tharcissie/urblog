@@ -27,9 +27,6 @@
     {%endif%}
    <i  class="o fa fa-comment-o fa-2x" aria-hidden="true"></i></a>{{ comments.count }}
         </div> 
-
-
-
                     </a></p>
                     </div>
                     <br>
@@ -83,7 +80,11 @@
                             {% csrf_token %}
                             <input type="hidden" name="comment_id" value="{{ comment.id }}">
                             {{ comment_form.as_p }}
+                            {% if user.is_authenticated%}
                             <input type="submit" value="Reply" class="btn btn-outline-success">
+                            {%else%}
+                            <button><a href="{% provider_login_url "google" %}?next={{ request.get_full_path }}">reply</a> </button>
+                            {% endif %}
                         </form>
                     </div>
                 </div>

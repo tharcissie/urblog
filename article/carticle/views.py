@@ -9,23 +9,7 @@ from django.http import HttpResponse
 from django.forms import ModelForm
 from django.utils import timezone
 from .forms import *
-# from taggit.models import Tag
 
-
-# class TagMixin(object):
-#     def get_context_data(self, **kwargs):
-#          context = super(TagMixin, self).get_context_data(**kwargs)
-#          context['tags']=Tag.objects.all()
-#          return context
-    
-# class ArticleList(ListView):
-#     model = Article
-    
-# class TagListView(TagMixin,ListView):
-#     model = Article
-#     def get_queryset(self):
-#         return Article.objects.filter(tags__name=self.kwargs.get('slug'))
-   
 
 class ArticleView(DetailView):
     model = Article

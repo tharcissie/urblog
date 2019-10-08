@@ -63,7 +63,7 @@ def article_details(request, pk, template_name='home/article_details.html'):
                  comment_qs = Comment.objects.get(id=reply_id)
              comment = Comment.objects.create(article=article, user=request.user, content=content, reply=comment_qs)
              comment.save() 
-             return redirect('article_list')
+             return redirect('home')
     comment_form = CommentForm()
     context = { 'object':article, 'comments':comments, 'comment_form':comment_form }  
     return render(request, template_name, context)
