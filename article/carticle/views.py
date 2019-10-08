@@ -20,10 +20,10 @@ class ArticleCreate(CreateView):
     fields = ['subject', 'message', 'picture' , 'tags']
     success_url = reverse_lazy('article_list')
 
-class ArticleUpdate(UpdateView):
-    model = Article
-    fields = ['subject', 'message', 'picture', 'tags']
-    success_url = reverse_lazy('article_list')
+# class ArticleUpdate(UpdateView):
+#     model = Article
+#     fields = ['subject', 'message', 'picture', 'tags']
+#     success_url = reverse_lazy('article_list')
 
 class ArticleDelete(DeleteView):
     model = Article
@@ -103,12 +103,12 @@ def article_create(request, template_name='carticle/article_form.html'):
 @login_required
 def article_update(request, pk, template_name='carticle/article_form.html'):
     # article= get_object_or_404(Article, pk=pk)
-    article = Article.objects.get(pk=pk)
-    form = ArticleForm(request.POST or None,files=request.FILES, instance=article)
-    if form.is_valid():
-        form.save()
+    article1 = Article.objects.get(pk=pk)
+    form1 = ArticleForm(request.POST or None, instance=article1)
+    if form1.is_valid():
+        form1.save()
         return redirect('article_list')
-    return render(request, template_name, {'form':form})
+    return render(request, template_name, {'form':form1})
 
 @login_required
 def article_delete(request, pk, template_name='carticle/article_confirm_delete.html'):

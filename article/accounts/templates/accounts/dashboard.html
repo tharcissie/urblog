@@ -1,5 +1,5 @@
 {% extends 'base_accounts.html' %}
-
+{% load humanize %}
 {% load static %}
 
 {% block content%}
@@ -17,8 +17,8 @@
                 {% for article in object_list %}
                   <tr>
                     <td>{{ article.subject }}<br></td>
-                    <td class="text-botton">{{article.created_at }}</td>
-                    <td>{{article.updated_at }}
+                    <td class="text-botton">{{article.created_at|naturaltime }}</td>
+                    <td>{{article.updated_at|naturaltime }}
                         <div class="float-right">
                             <a class="btn btn-outline-light mr-4 text-light bg-success align-baseline"  href="{% url 'article_detail' article.id %}">View</a>
                             <a class="btn btn-outline-light mr-4 text-light bg-warning" href="{% url 'article_edit' article.id %}">Update</a>
