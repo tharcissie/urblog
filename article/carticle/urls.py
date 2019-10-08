@@ -8,8 +8,6 @@ urlpatterns = [
     path('edit/<int:pk>', views.article_update, name='article_edit'),
     path('delete/<int:pk>', views.article_delete, name='article_delete'),
     path('articles/colleges/<int:pk>', views.ArticleCollege.as_view(), name='article_by_college'),
-    # path('articles/user/<int:pk>', views.ArticleList.as_view(), name='article_by_user'),
-    # path('tag/<slug>/',views.TagListView.as_view(), name='tagged'),
     path('view/<int:pk>/like/', views.ArticleLikeToggle.as_view(), name='like_toggle'), #like path
     path('view/<int:pk>/dislike/', views.ArticleDislikeToggle.as_view(), name='dislike_toggle'),#dislike path
  ]
