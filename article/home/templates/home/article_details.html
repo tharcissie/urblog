@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% load socialaccount%}
-
 {% load humanize %}
+
 
 {% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="row">
             <div class="col-10">
-                <h5 class="text-center mt-4"> {{object.subject}}</h5>
+                <h3 class="text-center mt-4"> <b>{{object.subject}}</b></h3>
                 <div  class="mt-4"> {{ object.message|safe}}</div>
                 <div class="row mt-4">
                     <div class="col-4">
