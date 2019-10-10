@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.forms import ModelForm
 from django.utils import timezone
 from .forms import *
-
+from django.core.paginator import Paginator
    
 
 class ArticleView(DetailView):
@@ -32,7 +32,9 @@ class ArticleDelete(DeleteView):
 
 def article_list(request, template_name='carticle/article_list.html'):
     article = Article.objects.all()
-    
+    paginator = Paginator(article, 6) # < 3 is the number of items on each page
+    page = request.GET.get('page') # < Get the page number
+    article = paginator.get_page(page) # < New in 2.0!
     data = {}
     data['object_list'] = article
     return render(request, template_name, data)
