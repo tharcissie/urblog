@@ -27,4 +27,6 @@
     text-decoration: none;
     float: left;
 }
-
+.input-large{
+    width: 100cm;
+}

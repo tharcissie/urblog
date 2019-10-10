@@ -11,10 +11,10 @@
 
 <!----------- Section for search field ----------------------->
 
-<div class="col-lg-8">
+<div class="col-lg-10 col-xs-4">
         <!-- <div class="row"> -->
-                <form action="{% url 'search_result' %}" method="get" class="form-inline my-4 my-lg-0">
-                        <input  type="search" name="query" class="form-control mr-sm-2" placeholder="Search......" aria-label="Search">
+                <form action="{% url 'search_result' %}" method="get" class="form-inline my-4 my-lg-2">
+                        <input  type="search" name="query" class="form-control mr-sm-2 input-sm" style="width:10m"!important placeholder="Search......" aria-label="Search">
                         <button type="submit" class="btn_search btn btn-outline-success my-2 my-sm-0" style=" background: #029ddd !important; color: #fff;font-weight: 900;">Go!</button>
                     </form>
         <!-- </div> -->
@@ -76,7 +76,7 @@
             <div class="row">
               {% for articles in article %}
 
-                <div class="col-md-4 mt-3 left">
+                <div class="col-md-4 mt-5 left  ">
 
                           {% for tag in articles.tags.all %} 
  
@@ -87,12 +87,12 @@
                             </div>           
                                 {% endfor %} 
 
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <a href="{% url 'article_details' articles.id %}"><h4 class="card-title text-primary">{{ articles.subject }}</h4></a>
-                            <p class="card-image"> <img src="{{ articles.picture.url}}" alt="" width="210px" height="100px"> </p>
+                    <div class="card mb-4 h-100 ">
+                        <div class="card card-body flex-fill ">
+                            <a href="{% url 'article_details' articles.id %}"><h4 class="card-title text-primary h-56 fixed">{{ articles.subject }}</h4></a>
+                            <p class="card-image"> <img src="{{ articles.picture.url}}" alt="" width="168px" height="100px"> </p>
                                   <!-- <p class="card-text">{{ articles.snippet }}</p> -->
-                            <p class="card-text"> <hr> </p>
+                            <hr>
                             <small><p class="card-text text-muted">{{ articles.created_at }}</p></small>
                             <small><p class="card-text text-muted">Publisher:  {{ articles.author }}</p></small>
                            <br>
@@ -193,7 +193,7 @@
               </div>
                 </div>   
                   </div>
-                     </div> 
+                     </div> <br><br>
 <div class="container text-center" style="clear: left">
      <a href="#"><p>See more Articles</p></a>
 </div>
