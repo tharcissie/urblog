@@ -6,22 +6,22 @@
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 {% block content %}
-<div class="row mt-3 mb-3">
+
 
 
 <!----------- Section for search field ----------------------->
 
-<div class="col-lg-10 col-xs-4">
-        <!-- <div class="row"> -->
-                <form action="{% url 'search_result' %}" method="get" class="form-inline my-4 my-lg-2">
-                        <input  type="search" name="query" class="form-control mr-sm-2 input-sm" style="width:10m"!important placeholder="Search......" aria-label="Search">
-                        <button type="submit" class="btn_search btn btn-outline-success my-2 my-sm-0" style=" background: #029ddd !important; color: #fff;font-weight: 900;">Go!</button>
-                    </form>
-        <!-- </div> -->
-    </div>
+ <div class="row align-items-center my-4">
+    <div class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center md-form mt-0">
+   <form class="input-group md-form form-sm form-1 pl-0 col-10" action="{% url 'search_result' %}" method="get">
+      <input class="form-control my-0 py-1 red-border" name="query" type="search" placeholder="Search" aria-label="Search" >
+      <div class="input-group-append" >
+        <button type="submit"  class="input-group-text "><i class="fas fa-search text-grey"
+            aria-hidden="true"></i></button>
+      </div>
+    </form>
+  </div>
 </div>
-  
-
 <!----------- Section for jumbotron ----------------------->
 
 <div class="jumbotron jumbotron-fluid">
@@ -164,7 +164,27 @@
                   </div>
                      </div> <br><br>
 <div class="container text-center" style="clear: left">
-     <a href="#"><p>See more Articles</p></a>
+
+<!-------------------section on pagination ------------------>
+
+<div class="row pagination align-items-center">
+    <div class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center">
+
+    {% if article.has_previous %}Page:
+    <!-- <a class="btn btn-dark" href="?page=1">First</a> -->
+    <a  class="btn btn-primary" href="?page={{ article.previous_page_number }}">Previous</a>
+    {% endif %}
+  
+    <span class="btn btn-light">{{ article.number }}</span>
+    <span class="btn btn-back">of</span>
+    <span class="btn btn-light">{{ article.paginator.num_pages }}</span>
+  
+    {% if article.has_next %}
+    <a class="btn btn-primary" href="?page={{article.next_page_number }}">Next</a>
+    <!-- <a class="btn btn-dark"href="?page={{ article.paginator.num_pages }}">Last</a> -->
+    {% endif %}
+  </div>
+</div>
 </div>
 
 {% endblock %}
