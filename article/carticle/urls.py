@@ -10,5 +10,6 @@ urlpatterns = [
     path('articles/colleges/<int:pk>', views.ArticleCollege.as_view(), name='article_by_college'),
     path('view/<int:pk>/like/', views.ArticleLikeToggle.as_view(), name='like_toggle'), #like path
     path('view/<int:pk>/dislike/', views.ArticleDislikeToggle.as_view(), name='dislike_toggle'),#dislike path
+    path('articles/category/', views.articles_in_category, name='articles_in_category'),
  ]
  
