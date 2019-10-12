@@ -38,22 +38,25 @@
         
     </tbody>
   </table> 
-  <div class="pagination">
+  <div class="row pagination align-items-center">
+      <div class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center">
 
     {% if object_list.has_previous %}
-    <a href="?page=1">First</a>
-    <a href="?page={{ object_list.previous_page_number }}">Previous</a>
+    <!-- <a class="btn btn-primary" href="?page=1">First</a> -->
+    <a  class="btn btn-dark" href="?page={{ object_list.previous_page_number }}">Previous</a>
     {% endif %}
   
-    <span>{{ object_list.number }}</span>
-    <span">of</span>
-    <span>{{ object_list.paginator.num_pages }}</span>
+    <span class="btn btn-light">{{ object_list.number }}</span>
+    <span class="btn btn-">of</span>
+    <span class="btn btn-light">{{ object_list.paginator.num_pages }}</span>
   
     {% if object_list.has_next %}
-    <a href="?page={{ object_list.next_page_number }}">Next</a>
-    <a href="?page={{ object_list.paginator.num_pages }}">Last</a>
+    <a class="btn btn-dark" href="?page={{ object_list.next_page_number }}">Next</a>
+    <!-- <a class="btn btn-primary"href="?page={{ object_list.paginator.num_pages }}">Last</a> -->
     {% endif %}
   </div>
+</div>
+</div>
 </main>
 
 {% endblock %}

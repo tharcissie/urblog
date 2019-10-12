@@ -522,7 +522,7 @@ input[type=button][disabled].default {
     font-weight: 400;
     font-size: 13px;
     text-align: left;
-    background: #79aec8;
+    background: blue;
     color: #fff;
 }
 
@@ -834,7 +834,7 @@ table#change-history tbody th {
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
-    background: #029ddd;
+    background: #066593;
     color: #ffc;
     overflow: hidden;
 }

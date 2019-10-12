@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView, RedirectView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from taggit.models import Tag
+from django.core.paginator import Paginator
 
 class TagMixin(object):
     def get_context_data(self, **kwargs):
@@ -43,6 +44,9 @@ class ArticleForm(ModelForm):
 
 def home(request):
     article = Article.objects.all()
+    paginator = Paginator(article, 6) # < 3 is the number of items on each page
+    page = request.GET.get('page') # < Get the page number
+    article = paginator.get_page(page) # < New in 2.0!
     return render(request, 'home/home.html',{'article':article})
 
 
