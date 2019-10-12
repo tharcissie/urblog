@@ -9,7 +9,7 @@
     position: relative;
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-color: #000; */
+    background-color: #000;
     overflow: hidden;
     -moz-transition: transform .4s;
     -o-transition: transform .4s;
@@ -171,7 +171,7 @@
 
 .slider > div span {
     display: block;
-    background: rgba(0,0,0,.5);
+    /* background: rgba(0,0,0,.5); */
     position: absolute;
     bottom: 0;
     color: #fff;
@@ -228,7 +228,7 @@ h1, h2, h3 {
 }
 body {
     font: 15px 'Titillium Web', Arial, sans-serif;
-    background: radial-gradient(#121212, #000);
+    /* background: radial-gradient(#121212, #000); */
     height: 100%;
     color: #aaa;
     margin: 0;

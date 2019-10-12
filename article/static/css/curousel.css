@@ -137,7 +137,7 @@
 .titleBar {
     z-index: 2;
     display: inline-block;
-    background: rgba(0,0,0,.5); 
+    background: rgba(0,0,0,.5);
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -200,16 +200,36 @@
     }
 }
 
+/* -------------------------------------- */
 
+#slider2 {
+    max-width: 30%;
+    margin-right: 20px;
+}
+
+.row2Wrap {
+    display: flex;
+}
+
+.content {
+    padding: 50px;
+    margin-bottom: 100px;
+}
 
 html {
     height: 100%;
     box-sizing: border-box;
-} 
-
-
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+h1, h2, h3 {
+    font-family: 'Crimson Text', sans-serif;
+    font-weight: 100;
+}
 body {
     font: 15px 'Titillium Web', Arial, sans-serif;
+    /* background: radial-gradient(#121212, #000); */
     height: 100%;
     color: #aaa;
     margin: 0;
@@ -218,4 +238,4 @@ body {
 
 .content {
     padding: 10px 15vw;
-} 
+}
