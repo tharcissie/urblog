@@ -71,12 +71,12 @@
     {% endif %}
 
     {% block messages %}
-    <div class="row mt-0">
-        <div class="col-lg-4 col-md-8 col-sm-10">
-            <h6>Profile Photo</h6>
+    <div class="row mt-0 ml-3">
+        <div class="col-lg-4 col-md-4 col-sm-10">
+            <h6 style="color: blue; margin-left:43px;">Profile Photo</h6>
         </div>
-       <div class="col-lg-2 col-md-8 col-sm-10">
-                <img class="rounded-circle profile-pic" src="{{ user.profile.image.url }} " width="50" height="50" >
+       <div  class="col-lg-2 col-md-4 col-sm-10">
+                <img class="rounded-circle profile-pic" style="margin-left: 43px; border-radius:50px" src="{{ user.profile.image.url }} " width="100" height="100" >
                 
         </div>
         

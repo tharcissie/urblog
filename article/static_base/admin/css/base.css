@@ -522,7 +522,11 @@ input[type=button][disabled].default {
     font-weight: 400;
     font-size: 13px;
     text-align: left;
+<<<<<<< HEAD
     background: #79aec8;
+=======
+    background: blue;
+>>>>>>> 1c92209c2a57db5feeaff4196e8c6f218a8f1470
     color: #fff;
 }
 
@@ -834,7 +838,11 @@ table#change-history tbody th {
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
+<<<<<<< HEAD
     background: #417690;
+=======
+    background: #066593;
+>>>>>>> 1c92209c2a57db5feeaff4196e8c6f218a8f1470
     color: #ffc;
     overflow: hidden;
 }
