@@ -39,6 +39,10 @@ def article_list(request, template_name='carticle/article_list.html'):
     data['object_list'] = article
     return render(request, template_name, data)
 
+def articles_in_category(request):
+
+    return render(request, 'carticle/articles_in_category.html')
+
 
 def article_detail(request, pk, template_name='carticle/article_detail.html'):
     article = get_object_or_404(Article, pk=pk)

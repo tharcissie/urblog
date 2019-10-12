@@ -5,36 +5,50 @@
 {% block stylesheet %}
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
-{% block content %}
+
 
 
 
 <!----------- Section for search field ----------------------->
 
- <div class="row align-items-center my-4">
-    <div class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center md-form mt-0">
-   <form class="input-group md-form form-sm form-1 pl-0 col-10" action="{% url 'search_result' %}" method="get">
-      <input class="form-control my-0 py-1 red-border" name="query" type="search" placeholder="Search" aria-label="Search" >
-      <div class="input-group-append" >
-        <button type="submit"  class="input-group-text "><i class="fas fa-search text-grey"
-            aria-hidden="true"></i></button>
-      </div>
-    </form>
-  </div>
+{% block search %}
+<div class="row align-items-center my-4">
+  <div class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center md-form mt-0">
+ <form class="input-group md-form form-sm form-1 pl-0 col-10" action="{% url 'search_result' %}" method="get">
+    <input class="form-control my-0 py-1 red-border" name="query" type="search" placeholder="Search" aria-label="Search" >
+    <div class="input-group-append" >
+      <button type="submit"  class="input-group-text "><i class="fas fa-search text-grey"
+          aria-hidden="true"></i></button>
+    </div>
+  </form>
 </div>
+</div>
+{% endblock %}
+  
+
 <!----------- Section for jumbotron ----------------------->
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Ur ideas board</h1>
-      <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-      <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-      <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+{% block curousel %}
+<div class="slider" id="slider1">
+  <!-- Slides -->
+  <div style="background-image:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/30256/1200_bodie-11.jpg)"></div>
+  <div style="background-image:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/30256/jungle.jpg)"></div>
+  <div style="background-image:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/30256/Gif-pont-lueur-600.gif)"></div>
+  <div style="background-image:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/30256/1200_110627-8240-Myst.jpg)"></div>
+  <div style="background-image:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/30256/1200_Sharpened-version.jpg)"></div>
+  <!-- The Arrows -->
+  <i class="left" class="arrows" style="z-index:2; position:absolute;"><svg viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z"></path></svg></i>
+  <i class="right" class="arrows" style="z-index:2; position:absolute;"><svg viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" transform="translate(100, 100) rotate(180) "></path></svg></i>
+  <!-- Title Bar -->
+  <span class="titleBar">
+      <h1>Welcome to UR IDEAS BOARD</h1>
+  </span>
+</div>
+{% endblock  %}
+  
 
-    </div>
-  </div>
 <!----------- Section for main container ----------------------->
-
+{% block content %}
 <h2>Latest Articles</h2>
 
 
