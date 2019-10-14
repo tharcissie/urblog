@@ -90,14 +90,13 @@
                     <div class="card mb-4 h-100 ">
                         <div class="card card-body flex-fill ">
                             <a href="{% url 'article_details' articles.id %}"><h4 class="card-title text-primary h-56 fixed">{{ articles.subject }}</h4></a>
-                            <p class="card-image"> <img src="{{ articles.picture.url}}" alt="" width="168px" height="100px"> </p>
-                                  <!-- <p class="card-text">{{ articles.snippet }}</p> -->
+                            <p class="card-image"> <img src="{{ articles.picture.url}}" alt="" width="166px" height="250px"> </p>
                             <hr>
                             <small><p class="card-text text-muted">{{ articles.created_at }}</p></small>
                             <small><p class="card-text text-muted">Publisher:  {{ articles.author }}</p></small>
                            <br>
 
-                                   <!-- section of likes and comments icon -->
+                                 
                          <div class="row ">
                         
                         <i class="fa fa-thumbs-o-up text-muted" aria-hidden="true"></i>{{  articles.likes.count }}
@@ -202,7 +201,6 @@
     <div class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center">
 
     {% if article.has_previous %}Page:
-    <!-- <a class="btn btn-dark" href="?page=1">First</a> -->
     <a  class="btn btn-primary" href="?page={{ article.previous_page_number }}">Previous</a>
     {% endif %}
   
@@ -212,7 +210,6 @@
   
     {% if article.has_next %}
     <a class="btn btn-primary" href="?page={{article.next_page_number }}">Next</a>
-    <!-- <a class="btn btn-dark"href="?page={{ article.paginator.num_pages }}">Last</a> -->
     {% endif %}
   </div>
 </div>
