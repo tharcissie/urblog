@@ -1,5 +1,5 @@
 .navbar{
-    background: #029ddd !important;
+    background: #066593 !important;
 }
 .login:hover, .signup:hover{
     background: #036f9d;
@@ -11,5 +11,5 @@
 }
 
 .login,.signup{
-    background-color:  #029ddd !important;
+    background-color:  #066593 !important;
 }
